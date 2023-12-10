@@ -26,7 +26,9 @@ contract ProxyOFTV2 is BaseOFTV2 {
         uint8 decimals = abi.decode(data, (uint8));
 
         require(_sharedDecimals <= decimals, "ProxyOFT: sharedDecimals must be <= decimals");
-        ld2sdRate = 10**(decimals - _sharedDecimals);
+        unchecked {
+            ld2sdRate = 10**(decimals - _sharedDecimals);
+        }
     }
 
     /************************************************************************

@@ -16,7 +16,9 @@ contract OFTV2 is BaseOFTV2, ERC20 {
     ) ERC20(_name, _symbol) BaseOFTV2(_sharedDecimals, _lzEndpoint) {
         uint8 decimals = decimals();
         require(_sharedDecimals <= decimals, "OFT: sharedDecimals must be <= decimals");
-        ld2sdRate = 10**(decimals - _sharedDecimals);
+        unchecked {
+            ld2sdRate = 10**(decimals - _sharedDecimals);
+        }
     }
 
     /************************************************************************
